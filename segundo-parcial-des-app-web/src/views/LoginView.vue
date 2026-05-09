@@ -1,0 +1,83 @@
+<template>
+  <div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="card shadow p-4" style="width: 400px;">
+      <h2 class="text-center mb-4">Iniciar Sesión</h2>
+
+      <!-- Alerta -->
+      <div
+        v-if="errorMessage"
+        class="alert alert-danger"
+      >
+        {{ errorMessage }}
+      </div>
+
+      <!-- Usuario -->
+      <div class="mb-3">
+        <label class="form-label">Usuario</label>
+        <input
+          v-model="username"
+          type="text"
+          class="form-control"
+          placeholder="Ingrese usuario"
+        />
+      </div>
+
+      <!-- Contraseña -->
+      <div class="mb-3">
+        <label class="form-label">Contraseña</label>
+        <input
+          v-model="password"
+          type="password"
+          class="form-control"
+          placeholder="Ingrese contraseña"
+        />
+      </div>
+
+      <!-- Botón -->
+      <button
+        class="btn btn-primary w-100"
+        @click="login"
+      >
+        Ingresar
+      </button>
+    </div>
+  </div>
+</template>
+
+<script>
+import users from '@/data/users.json'
+
+export default {
+  name: 'LoginView',
+
+  data() {
+    return {
+      username: '',
+      password: '',
+      errorMessage: ''
+    }
+  },
+
+  methods: {
+    login() {
+      const user = users.find(
+        u =>
+          u.username === this.username &&
+          u.password === this.password
+      )
+
+      if (user) {
+        localStorage.setItem(
+          'user',
+          JSON.stringify(user)
+        )
+
+        this.$router.push('/dashboard')
+      } else {
+        this.errorMessage =
+          'Usuario o contraseña incorrectos'
+      }
+    }
+  }
+}
+</script>

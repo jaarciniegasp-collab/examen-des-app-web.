@@ -17,9 +17,16 @@
         <input
           v-model="username"
           type="text"
+          ref="userInput"
           class="form-control"
           placeholder="Ingrese usuario"
+          tabindex="1"
+          @keyup.enter="$refs.passInput.focus()" 
         />
+        <!-- modificacion 1: nombre del input de usuario ref="userInput 
+            modificacion 2: @keyup.enter="$refs.passInput.focus()" al undir enter reenvía el curso al input passInput 
+            modificación 3: tabindex="1" da la gerarquia de la tabulación
+        -->
       </div>
 
       <!-- Contraseña -->
@@ -27,17 +34,26 @@
         <label class="form-label">Contraseña</label>
         <input
           v-model="password"
+          ref="passInput"
           type="password"
           class="form-control"
           placeholder="Ingrese contraseña"
+          tabindex="2"
+          @keyup.enter="login"
         />
+        <!-- modificacion 1: nombre del input de usuario ref="passInput" 
+            modificacion 2: @keyup.enter="login" al undir enter lo que hace es que la funcion login se jecute para que no se envie el formulario mal y se valide
+            modificación 3: tabindex="2" da la gerarquia de la tabulación
+        -->
       </div>
 
       <!-- Botón -->
       <button
         class="btn btn-primary w-100"
         @click="login"
+        tabindex="3"
       >
+      <!-- modificación 1: tabindex="3" da la gerarquia de la tabulación-->
         Ingresar
       </button>
     </div>

@@ -17,11 +17,11 @@ const routes = [
   },
   {
     path: '/dashboard',
-    component: DashboardView.vue
+    component: DashboardView
   },
   {
     path:'/productos',
-    component: ProductView.vue
+    component: ProductView
   }
   
 ]

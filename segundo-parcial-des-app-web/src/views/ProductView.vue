@@ -1,6 +1,8 @@
 <template>
-    <p> Edicion </p>
+    f
 </template>
 <script>
-
+export default{
+    name:'ProductView'
+}
 </script>

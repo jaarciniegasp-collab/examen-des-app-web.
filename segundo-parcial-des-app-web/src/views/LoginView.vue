@@ -11,7 +11,10 @@
         <input
           v-model="username"
           type="text"
+          ref="usuario"
           class="form-control input-style"
+          tabindex="1"
+          @keyup.enter="$refs.contrasena.focus()" 
           placeholder="Usuario"
         />
       </div>
@@ -20,15 +23,19 @@
       <div class="mb-3">
         <input
           v-model="password"
+          ref="contrasena"
           type="password"
           class="form-control input-style"
+          tabindex="2"
           placeholder="Contraseña"
+          @keyup.enter="isLogin ? login() : register()"
         />
       </div>
 
       <button
         class="btn btn-main w-100 mb-2"
         @click="isLogin ? login() : register()"
+        tabindex="3"
       >
         {{ isLogin ? 'Entrar' : 'Crear cuenta' }}
       </button>

@@ -20,13 +20,18 @@
                 Categorías
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="#">Viveres</a></li>
+                <li><a class="dropdown-item" href="#">Lacteos y Huevos</a></li>
+                <li><a class="dropdown-item" href="#">Licores</a></li>
+                <li><a class="dropdown-item" href="#">Dulces</a></li>
+                <li><a class="dropdown-item" href="#">Cuidado Personal</a></li>
                 </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" >Contacto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" @click="salida">Salir</a>
             </li>
             </ul>
         </div>
@@ -42,6 +47,9 @@
             },
             productos(){
                 this.$router.push('/productos')
+            },
+            salida(){
+                this.$router.push('/salida')
             }
         }
     }

@@ -5,8 +5,7 @@ import router from './router'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js"; // <--- Esto es clave
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-
 createApp(App)
   .use(router)
   .mount('#app')
+  

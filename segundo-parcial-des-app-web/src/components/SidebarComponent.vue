@@ -10,13 +10,13 @@
         <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#" @click="cliente">Cliente</a>
+                <a class="nav-link" :class="{ 'active fw-bold link-light': seccionActiva === 'cliente' }" aria-current="page" href="#" @click="cliente">Cliente</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" @click="productos">Productos Edicion</a>
+                <a class="nav-link active" href="#" :class="{ 'active fw-bold link-light': seccionActiva === 'productos' }" @click="productos">Productos Edicion</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Categorías
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark">
@@ -28,10 +28,10 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" >Contacto</a>
+                <a class="nav-link active" href="#" >Contacto</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" @click="salida">Salir</a>
+                <a class="nav-link active" href="#" @click="salida">Salir</a>
             </li>
             </ul>
         </div>
@@ -41,12 +41,20 @@
     export default{
         name:'SidebarComponent',
         
+        data(){
+            return{
+                seccionActiva :'cliente'
+            }
+        },
         methods:{
             cliente(){
                 this.$router.push('/dashboard')
+                // se utiliza para controlar los resaltos de los link entre paginas 
+                this.seccionActiva = 'cliente'
             },
             productos(){
-                this.$router.push('/productos')
+                this.$router.push('/productos');
+                this.seccionActiva = 'productos'
             },
             salida(){
                 this.$router.push('/salida')

@@ -2,34 +2,43 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import LoginView from '../views/LoginView.vue'
 import DashboardView from '../views/DashboardView.vue'
-import ProductView from '@/views/ProductView.vue'
+import ProductView from '../views/ProductView.vue'
 
 const routes = [
   {
     path: '/',
-    redirect: '/login',
+    redirect: '/login'
   },
+
   {
     path: '/login',
+    name: 'login',
     component: LoginView,
-    //evita que el navbar se coloque en el login 
-    meta: {hideNavbar: true}
+    meta: {
+      hideNavbar: true
+    }
   },
+
   {
     path: '/dashboard',
+    name: 'dashboard',
     component: DashboardView
   },
+
   {
-    path:'/productos',
+    path: '/productos',
+    name: 'productos',
     component: ProductView
   },
+
   {
-    path:'/salida',
+    path: '/salida',
+    name: 'salida',
     component: LoginView,
-    //evita que el navbar se coloque en el login 
-    meta: {hideNavbar: true}
-  },
-  
+    meta: {
+      hideNavbar: true
+    }
+  }
 ]
 
 const router = createRouter({

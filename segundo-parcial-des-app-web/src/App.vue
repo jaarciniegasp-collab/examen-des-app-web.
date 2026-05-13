@@ -1,12 +1,31 @@
 <template>
-  <NavbarComponent v-if="!route.meta.hideNavbar"/>
-  <router-view />
+  <div class="app-container">
+    <NavbarComponent v-if="!route.meta.hideNavbar" />
+
+    <main class="contenido">
+      <router-view />
+    </main>
+
+    <FooterComponent v-if="!route.meta.hideNavbar" />
+  </div>
 </template>
-<!-- la palabra setup registra cualquier componenete importado-->
+
 <script setup>
-import { useRoute } from 'vue-router';
-// importamos el archivo NavbarComponent para monstrar el encabezado en todas las pestañas 
-import NavbarComponent from './components/NavbarComponent.vue';
-//mirar en la ruta donde estoy parado 
+import { useRoute } from 'vue-router'
+import NavbarComponent from './components/NavbarComponent.vue'
+import FooterComponent from './components/FooterComponent.vue'
+
 const route = useRoute()
 </script>
+
+<style>
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contenido {
+  flex: 1;
+}
+</style>

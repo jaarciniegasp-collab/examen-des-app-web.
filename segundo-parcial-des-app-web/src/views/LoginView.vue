@@ -141,7 +141,7 @@ export default {
 <style scoped>
 .login-bg {
   height: 100vh;
-  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  background: linear-gradient(135deg, #0e162f, #2563eb);
   display: flex;
   justify-content: center;
   align-items: center;

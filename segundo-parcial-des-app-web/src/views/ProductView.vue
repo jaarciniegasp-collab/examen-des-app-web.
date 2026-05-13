@@ -11,48 +11,23 @@
 
         <div class="row">
           <div class="col-md-3 mb-2">
-            <input
-              v-model="producto.nombre"
-              type="text"
-              class="form-control"
-              placeholder="Nombre del producto"
-            />
+            <input v-model="producto.nombre" type="text" class="form-control" placeholder="Nombre del producto"/>
           </div>
 
           <div class="col-md-2 mb-2">
-            <input
-              v-model="producto.precio"
-              type="number"
-              class="form-control"
-              placeholder="Precio"
-            />
+            <input v-model="producto.precio" type="number" class="form-control" placeholder="Precio"/>
           </div>
 
           <div class="col-md-3 mb-2">
-            <input
-              v-model="producto.categoria"
-              type="text"
-              class="form-control"
-              placeholder="Categoría"
-            />
+            <input v-model="producto.categoria" type="text" class="form-control" placeholder="Categoría"/>
           </div>
 
           <div class="col-md-4 mb-2">
-            <input
-              v-model="producto.descripcion"
-              type="text"
-              class="form-control"
-              placeholder="Descripción"
-            />
+            <input v-model="producto.descripcion" type="text" class="form-control" placeholder="Descripción"/>
           </div>
         </div>
 
-        <!-- BOTONES -->
-        <button
-          v-if="!editando"
-          @click="agregarProducto"
-          class="btn btn-success mt-2"
-        >
+        <button v-if="!editando" @click="agregarProducto" class="btn btn-success mt-2">
           Agregar Producto
         </button>
 
@@ -63,7 +38,7 @@
     </div>
 
     <!-- TABLA -->
-    <table class="table table-striped table-hover">
+    <table class="table table-striped table-hover text-center">
       <thead class="table-dark">
         <tr>
           <th>ID</th>
@@ -78,26 +53,25 @@
         <tr v-for="item in productos" :key="item.id">
           <td>{{ item.id }}</td>
           <td>{{ item.nombre }}</td>
-          <td>${{ item.precio }}</td>
+          <td>$ {{ item.precio }}</td>
           <td>{{ item.categoria }}</td>
 
           <td>
-            <button
-              class="btn btn-warning btn-sm me-2"
-              @click="editarProducto(item)"
-            >
+            <button class="btn btn-warning btn-sm me-2" @click="editarProducto(item)">
               Editar
             </button>
 
-            <button
-              class="btn btn-danger btn-sm me-2"
-              @click="eliminarProducto(item.id)"
-            >
+            <button class="btn btn-danger btn-sm me-2" @click="eliminarProducto(item.id)">
               Eliminar
             </button>
 
-            <button class="btn btn-info btn-sm" @click="verDetalles(item)">
-              Ver detalles
+            <button class="btn btn-info btn-sm me-2" @click="verDetalles(item)">
+              Ver
+            </button>
+
+            <!-- 🛒 BOTÓN CARRITO -->
+            <button class="btn btn-success btn-sm" @click="agregarAlCarrito(item)">
+              Agregar al carrito
             </button>
           </td>
         </tr>
@@ -115,7 +89,6 @@ export default {
   data() {
     return {
       productos: [],
-
       producto: {
         id: null,
         nombre: "",
@@ -123,7 +96,6 @@ export default {
         categoria: "",
         descripcion: "",
       },
-
       editando: false,
     };
   },
@@ -133,20 +105,21 @@ export default {
   },
 
   methods: {
-    // CARGAR PRODUCTOS
     cargarProductos() {
       const datos = localStorage.getItem("productos");
 
       if (!datos) {
         localStorage.setItem("productos", JSON.stringify(productosJSON));
-
         this.productos = productosJSON;
       } else {
         this.productos = JSON.parse(datos);
       }
     },
 
-    // CREATE
+    guardarProductos() {
+      localStorage.setItem("productos", JSON.stringify(this.productos));
+    },
+
     agregarProducto() {
       if (!this.producto.nombre || !this.producto.precio) {
         alert("Completa los campos");
@@ -159,63 +132,44 @@ export default {
       };
 
       this.productos.push(nuevoProducto);
-
       this.guardarProductos();
-
       this.limpiarFormulario();
     },
 
-    // GUARDAR LOCALSTORAGE
-    guardarProductos() {
-      localStorage.setItem("productos", JSON.stringify(this.productos));
-    },
-
-    // EDITAR
     editarProducto(item) {
       this.producto = { ...item };
-
       this.editando = true;
     },
 
-    // UPDATE
     actualizarProducto() {
-      const index = this.productos.findIndex((p) => p.id === this.producto.id);
+      const index = this.productos.findIndex(
+        (p) => p.id === this.producto.id
+      );
 
       if (index !== -1) {
-        this.productos[index] = {
-          ...this.producto,
-        };
-
+        this.productos[index] = { ...this.producto };
         this.guardarProductos();
-
         this.limpiarFormulario();
-
         this.editando = false;
       }
     },
 
-    // DELETE
     eliminarProducto(id) {
-      const confirmar = confirm("¿Seguro que deseas eliminar este producto?");
-
-      if (confirmar) {
+      if (confirm("¿Seguro que deseas eliminar este producto?")) {
         this.productos = this.productos.filter((p) => p.id !== id);
-
         this.guardarProductos();
       }
     },
 
-    // VER DETALLES
     verDetalles(producto) {
       alert(
         `Nombre: ${producto.nombre}
 Precio: $${producto.precio}
 Categoría: ${producto.categoria}
-Descripción: ${producto.descripcion}`,
+Descripción: ${producto.descripcion}`
       );
     },
 
-    // LIMPIAR
     limpiarFormulario() {
       this.producto = {
         id: null,
@@ -224,6 +178,14 @@ Descripción: ${producto.descripcion}`,
         categoria: "",
         descripcion: "",
       };
+    },
+
+    // 🛒 CARRITO
+    agregarAlCarrito(producto) {
+      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      carrito.push(producto);
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      alert("Producto agregado al carrito");
     },
   },
 };

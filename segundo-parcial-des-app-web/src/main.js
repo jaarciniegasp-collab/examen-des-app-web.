@@ -7,5 +7,5 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js"; // <--- Esto es clave
 
 createApp(App)
   .use(router)
-  
+  .mount('#app')
   

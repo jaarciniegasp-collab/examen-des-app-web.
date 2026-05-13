@@ -22,7 +22,13 @@ const routes = [
   {
     path:'/productos',
     component: ProductView
-  }
+  },
+  {
+    path:'/salida',
+    component: LoginView,
+    //evita que el navbar se coloque en el login 
+    meta: {hideNavbar: true}
+  },
   
 ]
 

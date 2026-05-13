@@ -1,18 +1,15 @@
 <template>
-  <div class="card mt-4" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">yolo</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-
+  <ProductCardComponent/>
 </template>
 
 <script>
-
+import ProductCardComponent from '@/components/ProductCardComponent.vue';
 
 export default {
   name: 'DashboardView',
+
+  components:{
+    ProductCardComponent
+  }
 }
 </script>

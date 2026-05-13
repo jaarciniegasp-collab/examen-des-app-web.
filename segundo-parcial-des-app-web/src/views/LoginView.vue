@@ -1,9 +1,8 @@
 <template>
   <div class="login-bg">
     <div class="login-card">
-
       <h2 class="text-center mb-3 title">
-        {{ isLogin ? 'Iniciar Sesión' : 'Registrarse' }}
+        {{ isLogin ? "Iniciar Sesión" : "Registrarse" }}
       </h2>
 
       <!-- Usuario -->
@@ -14,7 +13,7 @@
           ref="usuario"
           class="form-control input-style"
           tabindex="1"
-          @keyup.enter="$refs.contrasena.focus()" 
+          @keyup.enter="$refs.contrasena.focus()"
           placeholder="Usuario"
         />
       </div>
@@ -37,13 +36,15 @@
         @click="isLogin ? login() : register()"
         tabindex="3"
       >
-        {{ isLogin ? 'Entrar' : 'Crear cuenta' }}
+        {{ isLogin ? "Entrar" : "Crear cuenta" }}
       </button>
 
       <p class="text-center toggle-text" @click="toggleMode">
-        {{ isLogin
-          ? '¿No tienes cuenta? Regístrate'
-          : '¿Ya tienes cuenta? Inicia sesión' }}
+        {{
+          isLogin
+            ? "¿No tienes cuenta? Regístrate"
+            : "¿Ya tienes cuenta? Inicia sesión"
+        }}
       </p>
     </div>
 
@@ -51,91 +52,90 @@
     <div v-if="alert.show" :class="['toast-alert', alert.type]">
       {{ alert.message }}
     </div>
-
   </div>
 </template>
 
 <script>
-import usersData from '@/data/users.json'
+import usersData from "@/data/users.json";
 
 export default {
-  name: 'LoginView',
+  name: "LoginView",
   data() {
     return {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
       isLogin: true,
       users: [...usersData],
       alert: {
         show: false,
-        message: '',
-        type: ''
-      }
-    }
+        message: "",
+        type: "",
+      },
+    };
   },
   methods: {
     showAlert(msg, type) {
-      this.alert.message = msg
-      this.alert.type = type
-      this.alert.show = true
+      this.alert.message = msg;
+      this.alert.type = type;
+      this.alert.show = true;
 
       setTimeout(() => {
-        this.alert.show = false
-      }, 2500)
+        this.alert.show = false;
+      }, 2500);
     },
 
     toggleMode() {
-      this.isLogin = !this.isLogin
-      this.username = ''
-      this.password = ''
+      this.isLogin = !this.isLogin;
+      this.username = "";
+      this.password = "";
     },
 
     login() {
       if (!this.username || !this.password) {
-        this.showAlert('Complete todos los campos', 'warning')
-        return
+        this.showAlert("Complete todos los campos", "warning");
+        return;
       }
 
       const user = this.users.find(
-        u => u.username === this.username && u.password === this.password
-      )
+        (u) => u.username === this.username && u.password === this.password,
+      );
 
       if (!user) {
-        this.showAlert('Usuario o contraseña incorrectos', 'danger')
-        return
+        this.showAlert("Usuario o contraseña incorrectos", "danger");
+        return;
       }
 
-      localStorage.setItem('user', JSON.stringify(user))
-      this.showAlert('Ingreso exitoso', 'success')
+      localStorage.setItem("user", JSON.stringify(user));
+      this.showAlert("Ingreso exitoso", "success");
 
       setTimeout(() => {
-        this.$router.push('/dashboard')
-      }, 1000)
+        this.$router.push("/dashboard");
+      }, 1000);
     },
 
     register() {
       if (!this.username || !this.password) {
-        this.showAlert('Complete todos los campos', 'warning')
-        return
+        this.showAlert("Complete todos los campos", "warning");
+        return;
       }
 
-      const exists = this.users.find(u => u.username === this.username)
+      const exists = this.users.find((u) => u.username === this.username);
       if (exists) {
-        this.showAlert('El usuario ya existe', 'danger')
-        return
+        this.showAlert("El usuario ya existe", "danger");
+        return;
       }
 
       this.users.push({
         id: this.users.length + 1,
         username: this.username,
-        password: this.password
-      })
+        password: this.password,
+      });
 
-      this.showAlert('Usuario registrado correctamente', 'success')
-      this.toggleMode()
-    }
-  }
-}
+      this.showAlert("Usuario registrado correctamente", "success");
+      this.toggleMode();
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -146,7 +146,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 .login-card {
@@ -154,7 +154,7 @@ export default {
   padding: 40px;
   border-radius: 18px;
   width: 380px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.5s ease;
 }
 
@@ -198,22 +198,40 @@ export default {
   background: white;
   padding: 12px 25px;
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   font-weight: 500;
   animation: slideUp 0.4s ease;
 }
 
-.toast-alert.success { border-left: 6px solid #22c55e; }
-.toast-alert.danger { border-left: 6px solid #ef4444; }
-.toast-alert.warning { border-left: 6px solid #f59e0b; }
+.toast-alert.success {
+  border-left: 6px solid #22c55e;
+}
+.toast-alert.danger {
+  border-left: 6px solid #ef4444;
+}
+.toast-alert.warning {
+  border-left: 6px solid #f59e0b;
+}
 
 @keyframes slideUp {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>

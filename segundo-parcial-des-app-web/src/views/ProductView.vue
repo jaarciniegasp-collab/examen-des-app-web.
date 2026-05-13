@@ -1,18 +1,15 @@
 <template>
   <div class="container mt-4">
-
     <h2 class="mb-4">Gestión de Productos</h2>
 
     <!-- FORMULARIO -->
     <div class="card mb-4 shadow-sm">
       <div class="card-body">
-
         <h4 class="mb-3">
-          {{ editando ? 'Editar Producto' : 'Agregar Producto' }}
+          {{ editando ? "Editar Producto" : "Agregar Producto" }}
         </h4>
 
         <div class="row">
-
           <div class="col-md-3 mb-2">
             <input
               v-model="producto.nombre"
@@ -48,7 +45,6 @@
               placeholder="Descripción"
             />
           </div>
-
         </div>
 
         <!-- BOTONES -->
@@ -60,14 +56,9 @@
           Agregar Producto
         </button>
 
-        <button
-          v-else
-          @click="actualizarProducto"
-          class="btn btn-warning mt-2"
-        >
+        <button v-else @click="actualizarProducto" class="btn btn-warning mt-2">
           Actualizar Producto
         </button>
-
       </div>
     </div>
 
@@ -84,18 +75,13 @@
       </thead>
 
       <tbody>
-
-        <tr
-          v-for="item in productos"
-          :key="item.id"
-        >
+        <tr v-for="item in productos" :key="item.id">
           <td>{{ item.id }}</td>
           <td>{{ item.nombre }}</td>
           <td>${{ item.precio }}</td>
           <td>{{ item.categoria }}</td>
 
           <td>
-
             <button
               class="btn btn-warning btn-sm me-2"
               @click="editarProducto(item)"
@@ -110,27 +96,21 @@
               Eliminar
             </button>
 
-            <button
-              class="btn btn-info btn-sm"
-              @click="verDetalles(item)"
-            >
+            <button class="btn btn-info btn-sm" @click="verDetalles(item)">
               Ver detalles
             </button>
-
           </td>
         </tr>
-
       </tbody>
     </table>
-
   </div>
 </template>
 
 <script>
-import productosJSON from '@/data/products.json'
+import productosJSON from "@/data/products.json";
 
 export default {
-  name: 'ProductView',
+  name: "ProductView",
 
   data() {
     return {
@@ -138,146 +118,113 @@ export default {
 
       producto: {
         id: null,
-        nombre: '',
-        precio: '',
-        categoria: '',
-        descripcion: ''
+        nombre: "",
+        precio: "",
+        categoria: "",
+        descripcion: "",
       },
 
-      editando: false
-    }
+      editando: false,
+    };
   },
 
   mounted() {
-    this.cargarProductos()
+    this.cargarProductos();
   },
 
   methods: {
-
     // CARGAR PRODUCTOS
     cargarProductos() {
-
-      const datos =
-        localStorage.getItem('productos')
+      const datos = localStorage.getItem("productos");
 
       if (!datos) {
+        localStorage.setItem("productos", JSON.stringify(productosJSON));
 
-        localStorage.setItem(
-          'productos',
-          JSON.stringify(productosJSON)
-        )
-
-        this.productos = productosJSON
-
+        this.productos = productosJSON;
       } else {
-
-        this.productos = JSON.parse(datos)
+        this.productos = JSON.parse(datos);
       }
     },
 
     // CREATE
     agregarProducto() {
-
-      if (
-        !this.producto.nombre ||
-        !this.producto.precio
-      ) {
-        alert('Completa los campos')
-        return
+      if (!this.producto.nombre || !this.producto.precio) {
+        alert("Completa los campos");
+        return;
       }
 
       const nuevoProducto = {
         ...this.producto,
-        id: Date.now()
-      }
+        id: Date.now(),
+      };
 
-      this.productos.push(nuevoProducto)
+      this.productos.push(nuevoProducto);
 
-      this.guardarProductos()
+      this.guardarProductos();
 
-      this.limpiarFormulario()
+      this.limpiarFormulario();
     },
 
     // GUARDAR LOCALSTORAGE
     guardarProductos() {
-
-      localStorage.setItem(
-        'productos',
-        JSON.stringify(this.productos)
-      )
+      localStorage.setItem("productos", JSON.stringify(this.productos));
     },
 
     // EDITAR
     editarProducto(item) {
+      this.producto = { ...item };
 
-      this.producto = { ...item }
-
-      this.editando = true
+      this.editando = true;
     },
 
     // UPDATE
     actualizarProducto() {
-
-      const index =
-        this.productos.findIndex(
-          p => p.id === this.producto.id
-        )
+      const index = this.productos.findIndex((p) => p.id === this.producto.id);
 
       if (index !== -1) {
-
         this.productos[index] = {
-          ...this.producto
-        }
+          ...this.producto,
+        };
 
-        this.guardarProductos()
+        this.guardarProductos();
 
-        this.limpiarFormulario()
+        this.limpiarFormulario();
 
-        this.editando = false
+        this.editando = false;
       }
     },
 
     // DELETE
     eliminarProducto(id) {
-
-      const confirmar =
-        confirm(
-          '¿Seguro que deseas eliminar este producto?'
-        )
+      const confirmar = confirm("¿Seguro que deseas eliminar este producto?");
 
       if (confirmar) {
+        this.productos = this.productos.filter((p) => p.id !== id);
 
-        this.productos =
-          this.productos.filter(
-            p => p.id !== id
-          )
-
-        this.guardarProductos()
+        this.guardarProductos();
       }
     },
 
     // VER DETALLES
     verDetalles(producto) {
-
       alert(
         `Nombre: ${producto.nombre}
 Precio: $${producto.precio}
 Categoría: ${producto.categoria}
-Descripción: ${producto.descripcion}`
-      )
+Descripción: ${producto.descripcion}`,
+      );
     },
 
     // LIMPIAR
     limpiarFormulario() {
-
       this.producto = {
         id: null,
-        nombre: '',
-        precio: '',
-        categoria: '',
-        descripcion: ''
-      }
-    }
-  }
-}
+        nombre: "",
+        precio: "",
+        categoria: "",
+        descripcion: "",
+      };
+    },
+  },
+};
 </script>

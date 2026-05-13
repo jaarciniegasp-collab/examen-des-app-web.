@@ -85,7 +85,7 @@
         "precio": 3800,
         "imagen": "./imagenes/Leche Entera.webp",
         "descripcion": "Leche pasteurizada entera, 1 litro",
-        "categoria": "lacteos y huevos"
+        "categoria": "lacteos"
     },
     {
         "id": 12,
@@ -93,7 +93,7 @@
         "precio": 3200,
         "imagen": "./imagenes/Yogur Griego.webp",
         "descripcion": "Yogur natural sin azúcar, 125 g",
-        "categoria": "lacteos y huevos"
+        "categoria": "lacteos"
     },
     {
         "id": 13,
@@ -101,7 +101,7 @@
         "precio": 9200,
         "imagen": "./imagenes/Queso Fresco.jpg",
         "descripcion": "Queso fresco de vaca, 250 g",
-        "categoria": "lacteos y huevos"
+        "categoria": "lacteos"
     },
     {
         "id": 14,
@@ -109,7 +109,7 @@
         "precio": 7400,
         "imagen": "./imagenes/Mantequilla Sin Sal.webp",
         "descripcion": "Mantequilla sin sal, 200 g",
-        "categoria": "lacteos y huevos"
+        "categoria": "lacteos"
     },
     {
         "id": 15,
@@ -117,7 +117,7 @@
         "precio": 9500,
         "imagen": "./imagenes/Huevos Blancos.jpg",
         "descripcion": "Docena de huevos blancos",
-        "categoria": "lacteos y huevos"
+        "categoria": "lacteos"
     },
     {
         "id": 16,
@@ -125,7 +125,7 @@
         "precio": 5800,
         "imagen": "./imagenes/Crema de Leche.webp",
         "descripcion": "Crema de leche para cocinar, 200 ml",
-        "categoria": "lacteos y huevos"
+        "categoria": "lacteos"
     },
     {
         "id": 17,
@@ -133,7 +133,7 @@
         "precio": 11200,
         "imagen": "./imagenes/Queso Mozzarella.webp",
         "descripcion": "Queso mozzarella rallado, 200 g",
-        "categoria": "lacteos y huevos"
+        "categoria": "lacteos"
     },
     {
         "id": 18,
@@ -141,7 +141,7 @@
         "precio": 4600,
         "imagen": "./imagenes/Leche Deslactosada.jpg",
         "descripcion": "Leche deslactosada, 1 litro",
-        "categoria": "lacteos y huevos"
+        "categoria": "lacteos"
     },
     {
         "id": 19,
@@ -149,7 +149,7 @@
         "precio": 5900,
         "imagen": "./imagenes/Yogur Natural.webp",
         "descripcion": "Yogur griego natural, 150 g",
-        "categoria": "lacteos y huevos"
+        "categoria": "lacteos"
     },
     {
         "id": 20,
@@ -157,7 +157,7 @@
         "precio": 13800,
         "imagen": "./imagenes/huevos organicos.jpg",
         "descripcion": "Docena de huevos orgánicos camperos",
-        "categoria": "lacteos y huevos"
+        "categoria": "lacteos"
     },
     {
         "id": 21,
@@ -325,7 +325,7 @@
         "precio": 14300,
         "imagen": "./imagenes/Shampoo Nutritivo.webp",
         "descripcion": "Shampoo nutritivo para cabello seco, 300 ml",
-        "categoria": "cuidado personal"
+        "categoria": "cuidado"
     },
     {
         "id": 42,
@@ -333,7 +333,7 @@
         "precio": 25300,
         "imagen": "./imagenes/Crema Hidratante Facial.webp",
         "descripcion": "Crema hidratante con ácido hialurónico, 50 ml",
-        "categoria": "cuidado personal"
+        "categoria": "cuidado"
     },
     {
         "id": 43,
@@ -341,7 +341,7 @@
         "precio": 4800,
         "imagen": "./imagenes/Jabón de Glicerinawebp.webp",
         "descripcion": "Jabón de glicerina neutro, 100 g",
-        "categoria": "cuidado personal"
+        "categoria": "cuidado"
     },
     {
         "id": 44,
@@ -349,7 +349,7 @@
         "precio": 11200,
         "imagen": "./imagenes/Desodorante Aerosol.webp",
         "descripcion": "Desodorante antitranspirante, 150 ml",
-        "categoria": "cuidado personal"
+        "categoria": "cuidado"
     },
     {
         "id": 45,
@@ -357,7 +357,7 @@
         "precio": 7600,
         "imagen": "./imagenes/Pasta Dental Blanqueadora.jpg",
         "descripcion": "Pasta dental con flúor, 90 g",
-        "categoria": "cuidado personal"
+        "categoria": "cuidado"
     },
     {
         "id": 46,
@@ -365,7 +365,7 @@
         "precio": 14300,
         "imagen": "./imagenes/Acondicionador Reparador.webp",
         "descripcion": "Acondicionador reparador de puntas, 300 ml",
-        "categoria": "cuidado personal"
+        "categoria": "cuidado"
     },
     {
         "id": 47,
@@ -373,7 +373,7 @@
         "precio": 32600,
         "imagen": "./imagenes/Protector Solar FPS 50.webp",
         "descripcion": "Protector solar facial FPS 50, 50 ml",
-        "categoria": "cuidado personal"
+        "categoria": "cuidado"
     },
     {
         "id": 48,
@@ -381,7 +381,7 @@
         "precio": 10200,
         "imagen": "./imagenes/Gel de Baño Aromático.jpg",
         "descripcion": "Gel de baño con aroma a lavanda, 500 ml",
-        "categoria": "cuidado personal"
+        "categoria": "cuidado"
     },
     {
         "id": 49,
@@ -389,7 +389,7 @@
         "precio": 5300,
         "imagen": "./imagenes/Toallas Húmedas.png",
         "descripcion": "Paquete de toallas húmedas, 20 unidades",
-        "categoria": "cuidado personal"
+        "categoria": "cuidado"
     },
     {
         "id": 50,
@@ -397,6 +397,6 @@
         "precio": 8100,
         "imagen": "./imagenes/Crema para Manos.jpg",
         "descripcion": "Crema nutritiva para manos, 75 ml",
-        "categoria": "cuidado personal"
+        "categoria": "cuidado"
     }
 ]

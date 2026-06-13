@@ -1,80 +1,47 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
-import LoginView from '../views/LoginView.vue'
-import DashboardView from '../views/DashboardView.vue'
-import ProductView from '../views/ProductView.vue'
-import Viveres from '@/components/Viveres.vue'
-import Licor from '@/components/Licor.vue'
-import Lacteo from '@/components/Lacteo.vue'
-import Dulces from '@/components/Dulces.vue'
-import Cuidado from '@/components/Cuidado.vue'
+import LoginView from '@/views/LoginView.vue'
+import DashboardView from '@/views/DashboardView.vue'
+import ProductListView from '@/views/ProductListView.vue'
+import UserListView from '@/views/UserListView.vue'
 
 const routes = [
-  {
-    path: '/',
-    redirect: '/login'
-  },
-
-  {
-    path: '/login',
-    name: 'login',
-    component: LoginView,
-    meta: {
-      hideNavbar: true
-    }
-  },
-
+  { path: '/', name: 'Login', component: LoginView },
   {
     path: '/dashboard',
-    name: 'dashboard',
-    component: DashboardView
-  },
-
-  {
-    path: '/productos',
-    name: 'productos',
-    component: ProductView
-  },
-
-  {
-    path: '/salida',
-    name: 'salida',
-    component: LoginView,
-    meta: {
-      hideNavbar: true
-    }
+    name: 'Dashboard',
+    component: DashboardView,
+    meta: { requiresAuth: true }
   },
   {
-    path:'/viveres',
-    name:'viveres',
-    component:Viveres,
+    path: '/products',
+    name: 'ProductList',
+    component: ProductListView,
+    meta: { requiresAuth: true }
   },
   {
-    path:'/licores',
-    name:'licores',
-    component:Licor,
-  },
-  {
-    path:'/lacteos',
-    name:'lacteos',
-    component:Lacteo,
-  },
-  {
-    path:'/dulces',
-    name:'dulces',
-    component:Dulces,
-  },
-  {
-    path:'/cuidado',
-    name:'cuidado',
-    component:Cuidado,
+    path: '/users',
+    name: 'UserList',
+    component: UserListView,
+    meta: { requiresAuth: true }
   }
-  
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+// Navigation guards
+router.beforeEach((to, from, next) => {
+  const logueado = localStorage.getItem('token')
+
+  if (to.meta.requiresAuth && !logueado) {
+    next({ name: 'Login' })
+  } else if (to.name === 'Login' && logueado) {
+    next({ name: 'Dashboard' })
+  } else {
+    next()
+  }
 })
 
 export default router

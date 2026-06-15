@@ -4,18 +4,25 @@
     <!-- Navbar global -->
     <NavbarComponent v-if="$route.name !== 'Login'" />
 
-    <router-view />
+    <main class="contenido">
+      <router-view />
+    </main>
+
+    <!-- Footer global -->
+    <FooterComponent v-if="$route.name !== 'Login'" />
 
   </div>
 </template>
 
 <script>
 import NavbarComponent from '@/components/NavbarComponent.vue'
+import FooterComponent from '@/components/FooterComponent.vue'
 
 export default {
   name: 'App',
   components: {
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   }
 }
 </script>
@@ -33,5 +40,15 @@ body,
 body {
   overflow-y: auto;
   background: #f8f9fa;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.contenido {
+  flex: 1;
 }
 </style>

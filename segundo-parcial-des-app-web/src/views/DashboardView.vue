@@ -1,10 +1,25 @@
 <template>
-  <div class="vh-100 d-flex flex-column">
-    <SidebarComponent />
-    <div class="flex-grow-1 p-4 bg-light">
-      <h2><i class="bi bi-speedometer2 me-2"></i>Bienvenido</h2>
-      <p>Selecciona una opción del menú para gestionar Productos o Usuarios.</p>
+  <div class="container-fluid">
+
+    <div class="row">
+
+      <SidebarComponent />
+
+      <main class="col-md-10 ms-sm-auto px-4 py-4">
+
+        <h2 class="mb-3">
+          <i class="bi bi-speedometer2 me-2"></i>
+          Bienvenido
+        </h2>
+
+        <p>
+          Selecciona una opción del menú para gestionar Productos o Usuarios.
+        </p>
+
+      </main>
+
     </div>
+
   </div>
 </template>
 
@@ -13,6 +28,8 @@ import SidebarComponent from '@/components/SidebarComponent.vue'
 
 export default {
   name: 'DashboardView',
-  components: { SidebarComponent }
+  components: {
+    SidebarComponent
+  }
 }
 </script>

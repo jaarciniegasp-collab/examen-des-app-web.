@@ -1,16 +1,30 @@
 <template>
-  <SidebarComponent />
-  <div class="flex-grow-1 p-4 bg-light">
+  <div class="container-fluid p-4 bg-light min-vh-100">
+
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h2><i class="bi bi-box-seam me-2"></i>Productos</h2>
+      <h2>
+        <i class="bi bi-box-seam me-2"></i>
+        Productos
+      </h2>
+
       <button class="btn btn-success" @click="abrirCrear">
-        <i class="bi bi-plus-lg me-1"></i> Nuevo Producto
+        <i class="bi bi-plus-lg me-1"></i>
+        Nuevo Producto
       </button>
     </div>
 
-    <AlertMessage :show="alert.show" :message="alert.message" :type="alert.type" @close="alert.show = false" />
+    <AlertMessage
+      :show="alert.show"
+      :message="alert.message"
+      :type="alert.type"
+      @close="alert.show = false"
+    />
 
-    <input v-model="search" class="form-control mb-3" placeholder="Buscar por nombre..." />
+    <input
+      v-model="search"
+      class="form-control mb-3"
+      placeholder="Buscar por nombre..."
+    />
 
     <div v-if="loading" class="text-center my-4">
       <div class="spinner-border text-primary"></div>
@@ -37,12 +51,12 @@
       :deleting="saving"
       @confirm="confirmarEliminar"
     />
+
   </div>
 </template>
 
 <script>
 import { ref, onMounted, computed } from 'vue'
-import SidebarComponent from '@/components/SidebarComponent.vue'
 import ProductTable from '@/components/ProductTable.vue'
 import ProductFormModal from '@/components/ProductFormModal.vue'
 import ConfirmDeleteModal from '@/components/ConfirmDeleteModal.vue'
@@ -50,7 +64,15 @@ import AlertMessage from '@/components/AlertMessage.vue'
 import productService from '@/services/productService'
 
 export default {
-  components: { SidebarComponent, ProductTable, ProductFormModal, ConfirmDeleteModal, AlertMessage },
+  name: 'ProductListView',
+
+  components: {
+    ProductTable,
+    ProductFormModal,
+    ConfirmDeleteModal,
+    AlertMessage
+  },
+
   setup() {
     const products = ref([])
     const loading = ref(false)
@@ -61,7 +83,11 @@ export default {
     const productoSeleccionado = ref(null)
     const formModal = ref(null)
     const deleteModal = ref(null)
-    const alert = ref({ show: false, message: '', type: 'success' })
+    const alert = ref({
+      show: false,
+      message: '',
+      type: 'success'
+    })
 
     const filteredProducts = computed(() =>
       products.value.filter((p) =>
@@ -71,15 +97,19 @@ export default {
 
     const showAlert = (message, type) => {
       alert.value = { show: true, message, type }
-      setTimeout(() => { alert.value.show = false }, 3000)
+
+      setTimeout(() => {
+        alert.value.show = false
+      }, 3000)
     }
 
     const load = async () => {
       loading.value = true
+
       try {
         const res = await productService.getAllProducts()
         products.value = res.data
-      } catch (err) {
+      } catch {
         showAlert('Error al cargar productos', 'danger')
       } finally {
         loading.value = false
@@ -104,12 +134,8 @@ export default {
     }
 
     const guardar = async (payload) => {
-      if (!payload.name || !payload.price) {
-        showAlert('Complete los campos obligatorios', 'warning')
-        return
-      }
-
       saving.value = true
+
       try {
         if (editando.value) {
           await productService.updateProduct(payload.id, payload)
@@ -118,10 +144,11 @@ export default {
           await productService.createProduct(payload)
           showAlert('Producto creado correctamente', 'success')
         }
+
         formModal.value.hide()
         await load()
-      } catch (err) {
-        showAlert('Error al guardar el producto', 'danger')
+      } catch {
+        showAlert('Error al guardar', 'danger')
       } finally {
         saving.value = false
       }
@@ -129,13 +156,17 @@ export default {
 
     const confirmarEliminar = async () => {
       saving.value = true
+
       try {
         await productService.deleteProduct(productoSeleccionado.value.id)
+
         showAlert('Producto eliminado correctamente', 'success')
+
         deleteModal.value.hide()
+
         await load()
-      } catch (err) {
-        showAlert('Error al eliminar el producto', 'danger')
+      } catch {
+        showAlert('Error al eliminar', 'danger')
       } finally {
         saving.value = false
       }
@@ -144,9 +175,21 @@ export default {
     onMounted(load)
 
     return {
-      products, filteredProducts, search, loading, saving, editando,
-      productoActual, productoSeleccionado, formModal, deleteModal, alert,
-      abrirCrear, abrirEditar, abrirEliminar, guardar, confirmarEliminar
+      filteredProducts,
+      loading,
+      saving,
+      search,
+      editando,
+      productoActual,
+      productoSeleccionado,
+      formModal,
+      deleteModal,
+      alert,
+      abrirCrear,
+      abrirEditar,
+      abrirEliminar,
+      guardar,
+      confirmarEliminar
     }
   }
 }

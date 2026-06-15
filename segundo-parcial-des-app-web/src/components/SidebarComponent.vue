@@ -32,16 +32,38 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav">
 
+          <!-- INICIO (antes Dashboard) -->
           <li class="nav-item mb-3">
             <router-link
               class="nav-link text-white"
               to="/dashboard"
             >
-              <i class="bi bi-speedometer2 me-2"></i>
-              Dashboard
+              <i class="bi bi-house-door-fill me-2"></i>
+              Inicio
             </router-link>
           </li>
 
+          <!-- NUEVO: Dropdown Categorías (manejado con Vue) -->
+          <li class="nav-item dropdown mb-3">
+            <a
+              class="nav-link dropdown-toggle text-white"
+              href="#"
+              role="button"
+              @click.prevent="toggleCategorias"
+              aria-expanded="false"
+            >
+              <i class="bi bi-tags-fill me-2"></i> Categorías
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" :class="{ show: mostrarCategorias }">
+              <li><router-link class="dropdown-item" to="/viveres" @click="cerrarMenuCategorias"><i class="bi bi-basket-fill me-2"></i>Víveres</router-link></li>
+              <li><router-link class="dropdown-item" to="/lacteos-y-huevos" @click="cerrarMenuCategorias"><i class="bi bi-egg-fill me-2"></i>Lácteos y huevos</router-link></li>
+              <li><router-link class="dropdown-item" to="/licores" @click="cerrarMenuCategorias"><i class="bi bi-cup-straw me-2"></i>Licores</router-link></li>
+              <li><router-link class="dropdown-item" to="/dulces" @click="cerrarMenuCategorias"><i class="bi bi-emoji-smile me-2"></i>Dulces</router-link></li>
+              <li><router-link class="dropdown-item" to="/cuidado-personal" @click="cerrarMenuCategorias"><i class="bi bi-heart-pulse me-2"></i>Cuidado personal</router-link></li>
+            </ul>
+          </li>
+
+          <!-- Productos -->
           <li class="nav-item mb-3">
             <router-link
               class="nav-link text-white"
@@ -52,6 +74,7 @@
             </router-link>
           </li>
 
+          <!-- Usuarios -->
           <li class="nav-item mb-3">
             <router-link
               class="nav-link text-white"
@@ -64,6 +87,7 @@
 
           <hr class="text-secondary">
 
+          <!-- Usuario actual -->
           <li class="nav-item mb-3">
             <span class="nav-link text-info">
               <i class="bi bi-person-circle me-2"></i>
@@ -71,6 +95,7 @@
             </span>
           </li>
 
+          <!-- Cerrar sesión -->
           <li class="nav-item">
             <a
               class="nav-link text-danger"
@@ -92,6 +117,12 @@
 export default {
   name: 'SidebarComponent',
 
+  data() {
+    return {
+      mostrarCategorias: false
+    }
+  },
+
   computed: {
     nombreUsuario() {
       const user = JSON.parse(localStorage.getItem('user'))
@@ -100,10 +131,16 @@ export default {
   },
 
   methods: {
+    toggleCategorias() {
+      this.mostrarCategorias = !this.mostrarCategorias
+    },
     logout() {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
       this.$router.push('/')
+    },
+      cerrarMenuCategorias() {
+      this.mostrarCategorias = false
     }
   }
 }

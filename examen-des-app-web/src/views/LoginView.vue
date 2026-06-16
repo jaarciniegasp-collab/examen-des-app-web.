@@ -290,18 +290,32 @@ export default {
 </script>
 
 <style scoped>
+* {
+  box-sizing: border-box;
+}
+
 .login-bg {
-  height: 100vh;
-  background: linear-gradient(135deg, #0e162f, #2563eb);
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  background: linear-gradient(
+    135deg,
+    #0e162f,
+    #2563eb
+  );
+
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .login-card {
   background: white;
-  padding: 40px;
   width: 420px;
+  max-width: 100%;
+  padding: 40px;
   border-radius: 18px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
@@ -319,7 +333,7 @@ export default {
   background: #2563eb;
   color: white;
   border: none;
-  min-width: 50px;
+  min-width: 55px;
   justify-content: center;
 }
 
@@ -366,5 +380,11 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+  .login-card {
+    padding: 25px;
+  }
 }
 </style>

@@ -32,9 +32,15 @@ html,
 body,
 #app {
   width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -50,5 +56,6 @@ body {
 
 .contenido {
   flex: 1;
+  width: 100%;
 }
 </style>
